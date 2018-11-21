@@ -1,0 +1,65 @@
+version: '3.4'
+
+services:
+
+  java:
+    ports:
+      - mode: ingress
+        published: 8080
+        target: 8080
+    deploy:
+      replicas: 4
+      endpoint_mode: vip
+      placement:
+        constraints:
+          - mode.platform.os == linux
+
+  netfx:
+    ports:
+      - mode: host
+        published: 80
+        target: 80
+      - mode: host
+        published: 50505
+        target: 50505
+      - mode: host
+        published: 50506
+        target: 50506
+    deploy:
+      replicas: 2
+      endpoint_mode: dnsrr
+      placement:
+        constraints:
+          - mode.platform.os == windows
+
+  prometheus:
+    ports:
+      - published: 9090
+        target: 9090
+    configs:
+      - source: prometheus
+        target: /etc/prometheus/prometheus.yml
+        uid: '65534'
+        gid: '65534'
+        mode: 0440
+    deploy:
+      placement:
+        constraints:
+          - mode.platform.os == linux
+
+  grafana:
+    ports:
+      - published: 3000
+        target: 3000
+    deploy:
+      placement:
+        constraints:
+          - mode.platform.os == linux
+
+networks:
+  app-net:
+
+configs:
+  prometheus:
+    external:
+      name: psmonitoring-prometheus
