@@ -82,13 +82,19 @@ sudo systemctl enable named
 
 # Eventually check the dns service
 dig @localhost java.localdns # Should return 127.0.0.1
+nslookup java.localdns       # Should return 127.0.0.1
 
 # Add these lines into: /etc/resolv.conf
-nameserver 127.0.0.1
+nameserver 127.0.0.1 # Remove the other lines if ping fails to resolve
 search localdns
 
+# Make these changes persistent via: /etc/sysconfig/network-scripts/ifcfg-eth0
+DNS1=8.8.8.8
+DNS2=8.8.4.4
+
 # Ping should now work
-ping java # Should ping 127.0.0.1
+nslookup java # Should return 127.0.0.1
+ping java     # Should ping 127.0.0.1
 
 # Possible other configs
 sudo iptables -t nat -A INPUT -p udp -m udp --dport 53 -j ACCEPT

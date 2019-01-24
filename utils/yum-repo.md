@@ -138,3 +138,21 @@ sudo yum clean all
 sudo rm -rf /var/cache/yum
 sudo yum update -y
 ```
+
+Ubuntu:
+```bash
+# Major release upgrade
+sudo do-release-upgrade
+# Upgrade packages missed at simple upgrade
+sudo rm /boot/grub/menu.lst && sudo update-grub-legacy-ec2 -y &&
+  sudo apt-get full-upgrade -y && sudo reboot
+# Only security updates
+sudo apt-get install unattended-upgrades -y
+# "smart" conflict resolution upgrade
+sudo apt-get update && sudo apt-get dist-upgrade -y
+
+# Upgrade only currently installed packages
+sudo apt-get update && sudo apt-get upgrade -y
+sudo apt-get install python-simplejson -y
+sudo apt-get autoremove -y # Uninstall the packages not used anymore
+```

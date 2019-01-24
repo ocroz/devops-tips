@@ -29,3 +29,8 @@ sudo systemctl enable|disable
 sudo journalctl -xe
 sudo journalctl -u sample
 ```
+
+```bash
+sudo systemctl list-unit-files --state=enabled
+sudo systemd-cgtop
+```
