@@ -106,6 +106,37 @@ docker config inspect --pretty psmonitoring-prometheus
 
 # Start a docker service
 docker stack deploy --compose-file docker-compose.yml --compose-file docker-compose-prod.yml stackpsmonitoring
+docker stack ls
 docker service ls
+docker service ps ${service-name}
+docker service inspect ${service-name}
 docker stack rm stackpsmonitoring
 ```
+
+Expose metrics from java app
+```bash
+#bash
+docker image build -t psmonitoring/java:v1 -f ./docker/java/Dockerfile .
+docker container run -d -P psmonitoring/java:v1
+docker container ls --last 1
+
+#powershell
+docker image build -t psmonitoring/netfx:v1 -f .\docker\netfx\Dockerfile .
+```
+
+promql
+```bash
+sum(irate($metric[12h])) without (host, instance, job, exported_instance)
+```
+
+Standard metrics for any language such as java/scala, node.js, etc.
+
+docker stack deploy creates or updates services as necessary.
+
+Prometheus Metric and Label naming:
+https://prometheus.io/docs/practices/naming/
+
+Grafana community dashboards, or share/export then in Dockerfile
+- COPY datasource-prometheus.yml
+- COPY dashboard-provider.yml
+- COPY ${your-dashboard}.json
