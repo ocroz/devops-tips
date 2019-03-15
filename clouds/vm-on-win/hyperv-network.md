@@ -14,7 +14,7 @@ Remove all or any useless network adapters
 - MACHINE > Network adapters > Uninstall all Hyper-V Virtual Ethernet Adapters
 
 Reset network + Restart Windows
-- Windows > Settings > Network & Internet > Network reset > Reset now
+- Windows > Settings > Network & Internet > Network reset > Reset now<br/>
 This recreates the missing needed network adapters
 
 ## Create new subnet with fixed ip for localhost

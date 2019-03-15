@@ -10,3 +10,6 @@ DISM /Online /Cleanup-Image /RestoreHealth
 CHKDSK C: /F /R
 ```
 +Force a manual defragmentation of the disks
+
+Programs launched at startup:<br/>
+%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup

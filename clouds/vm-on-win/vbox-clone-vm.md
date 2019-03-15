@@ -1,4 +1,4 @@
-# VirtualBox: Create a new VM from a snapshot
+# VirtualBox: Clone a VM
 
 ## Create the source VM
 
