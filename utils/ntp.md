@@ -1,5 +1,7 @@
 # Network Time Protocal
 
+https://www.ntppool.org/
+
 ```bash
 sudo yum install ntp -y
 

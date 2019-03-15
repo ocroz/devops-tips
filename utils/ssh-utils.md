@@ -60,6 +60,9 @@ Install/Start putty's pageant and weasel-pageant:
 - https://www.digitalocean.com/community/tutorials/how-to-use-pageant-to-streamline-ssh-key-authentication-with-putty
 - https://github.com/vuori/weasel-pageant
 
+Copy pageant shortcut under:<br/>
+%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
+
 $HOME/.bashrc
 ```bash
 eval $(/mnt/c/Program\ Files/Putty/weasel-pageant-1.1/weasel-pageant -r)
