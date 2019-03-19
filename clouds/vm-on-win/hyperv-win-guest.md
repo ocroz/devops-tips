@@ -36,3 +36,7 @@ From Brave/Chrome:
 
 - Windows 10: https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/deploy-net-framework-35-by-using-deployment-image-servicing-and-management--dism
 - Windows XP: https://www.microsoft.com/en-us/download/confirmation.aspx?id=21
+
+## License
+
+- KMS: https://docs.microsoft.com/en-us/windows/deployment/volume-activation/activate-using-key-management-service-vamt
