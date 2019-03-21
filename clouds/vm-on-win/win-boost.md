@@ -13,3 +13,6 @@ CHKDSK C: /F /R
 
 Programs launched at startup:<br/>
 %USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
+
+Cheaper licenses:<br/>
+https://www.hrkgame.com/fr/games/products/?search=office

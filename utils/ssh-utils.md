@@ -69,3 +69,12 @@ eval $(/mnt/c/Program\ Files/Putty/weasel-pageant-1.1/weasel-pageant -r)
 ```
 
 Note: No other key should be loaded on login (see above) on remote-proxy or the ssh forward will fail.
+
+## Using Putty's pageant for Git Bash
+
+- https://github.com/cuviper/ssh-pageant
+
+$HOME/.bashrc
+```bash
+eval $(/usr/bin/ssh-pageant -r -a "/tmp/.ssh-pageant-$USERNAME")
+```
