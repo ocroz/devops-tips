@@ -41,6 +41,15 @@ else
 fi
 ```
 
+Or:
+```bash
+# .bash_profile
+
+# To re-use the loaded ssh-keys on every login
+export SSH_AUTH_SOCK=$(
+find /tmp -path '*/ssh-*' -name 'agent*' -uid $(id -u) 2>/dev/null | tail -n1)
+```
+
 No need to enter passphrase again, neither on localhost, nor on proxy, to reach target:
 ```bash
 ssh user@remote-proxy -A # Forward identity to remote-proxy for remote-target

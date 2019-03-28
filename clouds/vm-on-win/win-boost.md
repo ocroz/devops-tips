@@ -11,6 +11,9 @@ CHKDSK C: /F /R
 ```
 +Force a manual defragmentation of the disks
 
+If `Microsoft Windows Search Filter Host` is burning the cpu usage:<br/>
+Control Panel > Indexing Options > Advanced > Rebuild
+
 Programs launched at startup:<br/>
 %USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
 

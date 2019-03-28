@@ -11,6 +11,10 @@ Windows Settings > Apps > Manage Optional Features
 
 Control Panel > Administrative Tools > Services
 - OpenSSH SSH Server > Start
+```bash
+# powershell
+Start-Service sshd
+```
 
 To use key based, rather than password based, authentication:
 ```bash
@@ -79,4 +83,21 @@ git config --local remote.${remote}.uploadpack "powershell git upload-pack"
 git fetch $remote
 git checkout $remote/master
 git branch --all
+```
+
+## quick start and stop
+
+Because it is better to keep it started as short as possible
+
+```bash
+# powershell
+
+# START
+Start-Service sshd
+New-NetFirewallRule -Name sshd -DisplayName 'OpenSSH SSH Server' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22
+Install-Module -Force OpenSSHUtils -Scope AllUsers
+
+# STOP
+Stop-Service sshd
+Remove-NetFirewallRule -Name sshd
 ```
