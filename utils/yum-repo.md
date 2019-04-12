@@ -67,7 +67,7 @@ sudo yum install yum-utils createrepo -y
 ```
 
 Add 50GB+ volume to the machine:
-- See [openstack-volumes](openstack-volumes.md)
+- See [openstack-volumes](../clouds/openstack/openstack-volumes.md)
 - To mount /mnt/yumrepo/mirror at /var/ftp/mirror
 
 /mnt/yumrepo/sync-centos.sh

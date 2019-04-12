@@ -49,3 +49,7 @@ API / Fork project:
 - https://directory.fsf.org/wiki/Bitwarden-ruby
 - https://github.com/jcs/rubywarden
 - https://github.com/jcs/rubywarden/blob/master/API.md
+
+Backup/restore:
+- https://help.bitwarden.com/article/backup-on-premise/
+- https://community.bitwarden.com/t/restoring-bitwarden-installation-to-another-server/1195

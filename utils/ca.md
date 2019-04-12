@@ -66,3 +66,13 @@ Deploy the following files on the server:
 
 Deploy the following file on the server:
 - ca.cert.pem
+
+```bash
+cp *.pem /etc/pki/ca-trust/source/anchors/
+update-ca-trust extract
+```
+
+## Troubleshooting
+
+Is the connection still insecure?
+- Check the IP defined in $myserver.ext, possible do not define any IP here.

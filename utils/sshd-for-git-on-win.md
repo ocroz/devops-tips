@@ -98,6 +98,5 @@ New-NetFirewallRule -Name sshd -DisplayName 'OpenSSH SSH Server' -Enabled True -
 Install-Module -Force OpenSSHUtils -Scope AllUsers
 
 # STOP
-Stop-Service sshd
-Remove-NetFirewallRule -Name sshd
+Stop-Service sshd ; Remove-NetFirewallRule -Name sshd
 ```
