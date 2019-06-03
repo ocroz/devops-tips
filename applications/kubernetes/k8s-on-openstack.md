@@ -1,9 +1,15 @@
-# Infraly
+# By Infraly
 
 References:
 - https://github.com/infraly/k8s-on-openstack
 - https://superuser.openstack.org/articles/deploy-kubernetes-openstack-ansible
 - https://stackoverflow.com/questions/18050911
+
+## Authentication to Openstack
+
+2 methods:
+- Either define the environment variable `OS_CLOUD` with these files:
+- Or DO NOT define the environment variable `OS_CLOUD`, but define other vars:
 
 PUBLIC CLOUDS: /etc/openstack/clouds-public.yaml
 ```yaml
@@ -32,7 +38,10 @@ clouds:
 
 OS VARS: ~/bin/openstack-password.sh (OS_PROJECT_ID required for k8s nginx)
 ```bash
+# Either define this variable:
 export OS_CLOUD=eu-zrh-cas-cmadmin-dev
+
+# Or define these other variables:
 export OS_AUTH_URL=https://cloud.eu-zrh.hub.kudelski.com:5000/
 export OS_PROJECT_NAME=cas-cmadmin-dev
 export OS_PROJECT_ID=10aae9a5a1e2439e893b2c96702b9fc2
@@ -43,6 +52,8 @@ echo "Please enter your OpenStack Password: "
 read -sr OS_PASSWORD_INPUT
 export OS_PASSWORD=$OS_PASSWORD_INPUT
 ```
+
+## Configuration of Kubernetes cluster
 
 K8s settings: ~/bin/k8s-on-openstack-env.sh
 ```bash
@@ -75,14 +86,18 @@ export MASTER_FLAVOR=t2.micro
 K8s inventory: ~/.config/openstack/k8s-hosts (Do NOT list localhost!)
 ```
 [master]
-k8s-master ansible_connection=ssh
+k8s-master
 
 [nodes]
-k8s-node[01:03] ansible_connection=ssh
+k8s-node[01:03]
 
 [all:children]
 master
 nodes
+
+[all:vars]
+ansible_connection=ssh
+ansible_python_interpreter=/usr/bin/python3
 ```
 
 Replace group_vars/all.yaml
@@ -91,11 +106,15 @@ Replace group_vars/all.yaml
 +nodes_name: "{{ name }}-node" # node id will automatically be appended
 ```
 
-Replace roles/openstack-nodes/tasks/main.yaml (*3)
+Replace roles/openstack-nodes/tasks/main.yaml (*n)
 ```bash
 -      hostname: "{{ nodes_name }}{{ item }}"
 +      hostname: "{{ nodes_name }}{{ '%02d'|format(item|int) }}"
 ```
+
+## Run the ansible playbook
+
+Either run the entire playbook straight forward, or go and fix the issues one by one when they happen.
 
 Steps:
 ```bash
@@ -124,7 +143,20 @@ ansible-playbook -i ~/.config/openstack/k8s-hosts site.yaml
 # Increase values in roles/common/tasks/main.yaml
 -  retries: 5
 +  retries: 10
+
+# If "Install k8s APT repo GPG key" fails for all nodes
+sudo -i
+vi /etc/hosts # Add $(hostname -s) for loopback ip 127.0.0.1
+
+# If "Install k8s APT repo GPG key" fails for all nodes
+sudo vi /etc/resolv.conf # Add the following nameserver
+nameserver 8.8.8.8
+nameserver 8.8.4.4 # Or other accepted DNS servers
+# Possibly also fix the DNS resolution problem permanently with
+# sudo apt-get update && sudo apt-get upgrade -y
 ```
+
+## Verify the Kubernetes cluster
 
 Checks:
 ```bash
