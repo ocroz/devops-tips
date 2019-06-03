@@ -1,5 +1,7 @@
 # nginx
 
+For a secure nginx: https://cipherli.st/
+
 ```bash
 sudo yum install epel-release -y
 sudo yum install nginx -y
