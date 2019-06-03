@@ -8,6 +8,7 @@ https://serverfault.com/questions/278711/how-to-create-a-yum-repository
 sudo yum install vsftpd -y
 sudo systemctl enable vsftpd
 sudo systemctl start vsftpd
+sudo setsebool -P ftpd_full_access=on
 ```
 
 /etc/vsftpd/vsftpd.conf
@@ -42,13 +43,13 @@ Add few files under the ftp server:
 sudo vi /var/ftp/hello.txt
 ```
 
-Test the ftp connection from localhost:
+Test the ftp connection from a ftp client ex bash on windows:
 ```bash
-$ sftp centos@10.176.227.1 # Use the ssh key
+$ sftp centos@10.176.227.1 # ftp over ssh using ssh key (port 22)
 ftp> ls
 ftp> ^D
 
-$ ftp -p 10.176.227.1
+$ ftp -p 10.176.227.1 # ftp targetting vsftpd server (port 21)
 Name (10.176.227.1:crozier): anonymous
 ftp> ls
 ftp> ^D
@@ -57,6 +58,14 @@ $ ftp -np 10.176.227.1
 ftp> user anonymous
 ftp> ls
 ftp> ^D
+
+$ ftp -np 10.176.227.1 <<EOF
+user anonymous
+get hello.txt
+bye
+EOF
+
+$ curl ftp://10.176.227.1/hello.txt
 ```
 
 ## FTP Yum Repo Mirror
