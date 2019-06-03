@@ -41,6 +41,7 @@ Tip for docker: `sudo systemctl restart docker`.
 CI_URL=https://gitlab.example.com/
 CI_TOKEN=t0k3n
 CI_HOST=gitlab.example.com:35.231.145.151
+CI_RUNNER=group-cmtools-infra # group (-$GROUPNAME) or specific (-$PROJECT)
 
 # Default docker volumes:
 # - To share gitlab ci cache with shell runner on same machine
@@ -51,12 +52,10 @@ sudo gitlab-runner register \
   --registration-token "$CI_TOKEN" \
   --executor "docker" \
   --docker-image alpine \
-  --docker-volumes '/home/gitlab-runner/cache:/cache' \
   --docker-volumes '/tmp:/tmp' \
   --docker-extra-hosts "$CI_HOST" \
-  --docker-privileged \
-  --description "docker-runner" \
-  --tag-list "$(hostname -s),docker" \
+  --description "$CI_RUNNER-docker-runner" \
+  --tag-list "$(hostname -s),group,docker" \
   --run-untagged \
   --locked=true
 
@@ -65,8 +64,8 @@ sudo gitlab-runner register \
   --url "$CI_URL" \
   --registration-token "$CI_TOKEN" \
   --executor "shell" \
-  --description "shell-runner" \
-  --tag-list "$(hostname -s),shell" \
+  --description "$CI_RUNNER-shell-runner" \
+  --tag-list "$(hostname -s),group,shell" \
   --run-untagged \
   --locked=true
 ```
