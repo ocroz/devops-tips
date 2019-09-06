@@ -21,7 +21,7 @@ fdisk /dev/vdb  # To format the new disk /dev/vdX
 ```bash
 mount | grep vdb && \
   umount -l /dev/vdb  # umount if mounted
-mkfs.ext4 /dev/vdc1   # Create the filesystem
+mkfs.ext4 /dev/vdb1   # Create the filesystem
 ```
 
 https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux_OpenStack_Platform/2/html/Getting_Started_Guide/ch16s03.html
@@ -33,7 +33,7 @@ ls /dev/disk/by-uuid/ # Idem
 https://serverfault.com/questions/138555/setup-symbolic-link-where-users-can-access-it-with-ftp
 ```bash
 mkdir -p /mnt/${volume}
-mount /dev/disk/by-uuid/${uuid} /mnt/${volume}
+mount /dev/disk/by-uuid/${uuid} /mnt/${volume} # mount /dev/vdb1 /mnt/${volume}
 
 # Either symlink
 ln -s /mnt/${volume}/${repo} /var/ftp/${repo}
@@ -42,4 +42,9 @@ ln -s /mnt/${volume}/${repo} /var/ftp/${repo}
 mkdir /var/ftp/${repo}
 mount --bind /mnt/${volume}/${repo} /var/ftp/${repo}
 setsebool -P ftpd_full_access=on
+```
+
+Keep the mount at reboot
+```bash
+echo "/dev/vdb1 /mnt/${volume} ext4 defaults 0 0">>/etc/fstab
 ```
