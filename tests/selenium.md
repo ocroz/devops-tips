@@ -1,7 +1,10 @@
 # Use selenium to automate actions on an application via the browser GUI
 
+See also [puppeteer](./puppeteer.md) which looks easier than selenium.
+
 Documentation:
 - https://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/index_exports_Builder.html
+- https://github.com/SeleniumHQ/selenium/blob/master/javascript/node/selenium-webdriver/lib/until.js // Conditions
 
 Mouse actions:
 - https://stackoverflow.com/questions/51675713
