@@ -1,6 +1,6 @@
-# Install docker on CentOS 7
+# Docker installation
 
-## Docker itself
+## CentOS 7
 
 ```bash
 sudo yum update -y
@@ -26,6 +26,26 @@ sudo reboot
 
 docker version
 ```
+
+## CentOS 8
+
+```bash
+sudo curl https://download.docker.com/linux/centos/docker-ce.repo \
+          -o /etc/yum.repos.d/docker-ce.repo
+sudo yum makecache
+sudo yum install -y docker-ce --nobest # yum or dnf
+
+# Version 18+
+docker --version
+
+sudo systemctl enable --now docker
+sudo systemctl status docker
+
+sudo usermod -aG docker centos # Then ssh logout, and re-login
+docker version
+```
+
+# Docker additional features
 
 ## Docker mirror
 

@@ -52,3 +52,15 @@ iptables -A INPUT -m state --state NEW -m tcp -p tcp --match multiport --dports 
 service iptables save
 iptables -S # Show all the rules at once
 ```
+
+## netstat and lsof
+
+```bash
+# Run with sudo to get more info
+sudo netstat -pan    # ALL
+sudo netstat -pantu  # tcp/udp only
+sudo netstat -pantue # Extended
+sudo netstat -taupen # same
+sudo netstat -plntue # LISTEN only
+sudo lsof -iTCP -sTCP:LISTEN -P
+```

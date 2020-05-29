@@ -31,6 +31,8 @@ sudo journalctl -u sample
 ```
 
 ```bash
+sudo systemctl
+sudo systemctl list-units --type=service --state=running
 sudo systemctl list-unit-files --state=enabled
 sudo systemd-cgtop
 ```

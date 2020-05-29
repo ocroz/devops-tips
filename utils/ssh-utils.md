@@ -88,3 +88,33 @@ $HOME/.bashrc
 ```bash
 eval $(/usr/bin/ssh-pageant -r -a "/tmp/.ssh-pageant-$USERNAME")
 ```
+
+## SSH Jump Host
+
+Reference: https://wiki.gentoo.org/wiki/SSH_jump_host
+
+```bash
+# Transfer identity through every host (there is a socket on every host)
+ssh -tA catgate ssh -tA centos@localhost ssh -A 192.168.1.33
+
+# Same but without socket on intermediate hosts
+ssh -A -J catgate,centos@localhost centos@192.168.1.33
+ssh -A centos@gitlab-runner-01 # This command uses below ~/.ssh/config
+```
+
+~/.ssh/config
+```bash
+### First jumphost. Directly reachable
+Host catgate
+  HostName 10.177.194.40
+
+### Second jumphost. Only reachable via catgate
+Host localhost
+  HostName localhost
+  ProxyJump catgate
+
+### Host only reachable via catgate and localhost
+Host gitlab-runner-01
+  HostName 192.168.1.33
+  ProxyJump centos@localhost
+```
