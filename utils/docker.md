@@ -1,5 +1,7 @@
 # Docker installation
 
+See also [../applications/docker/](../applications/docker/).
+
 ## CentOS 7
 
 ```bash
@@ -33,6 +35,8 @@ docker version
 sudo curl https://download.docker.com/linux/centos/docker-ce.repo \
           -o /etc/yum.repos.d/docker-ce.repo
 sudo yum makecache
+# Either install containerd first, or use --nobest
+sudo yum install -y https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm
 sudo yum install -y docker-ce --nobest # yum or dnf
 
 # Version 18+
@@ -43,6 +47,10 @@ sudo systemctl status docker
 
 sudo usermod -aG docker centos # Then ssh logout, and re-login
 docker version
+
+sudo firewall-cmd --permanent --zone=trusted --add-interface=docker0
+sudo firewall-cmd --reload
+docker run busybox nslookup google.com
 ```
 
 # Docker additional features

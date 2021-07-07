@@ -51,5 +51,18 @@ API / Fork project:
 - https://github.com/jcs/rubywarden/blob/master/API.md
 
 Backup/restore:
-- https://help.bitwarden.com/article/backup-on-premise/
+- https://bitwarden.com/help/article/backup-on-premise/
 - https://community.bitwarden.com/t/restoring-bitwarden-installation-to-another-server/1195
+
+Upgrade:
+- See also backup/restore
+- https://bitwarden.com/help/article/updating-on-premise/
+
+```bash
+sudo yum update -y
+uname -r;yum list installed|grep kernel # running vs installed kernel versions
+sudo reboot # to apply the new kernel
+cd /var/bitwarden
+./bitwarden.sh updateself
+./bitwarden.sh update
+```

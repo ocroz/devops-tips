@@ -68,8 +68,13 @@ Deploy the following file on the server:
 - ca.cert.pem
 
 ```bash
+# CentOS
 cp *.pem /etc/pki/ca-trust/source/anchors/
 update-ca-trust extract
+
+# Ubuntu
+cp *.pem /usr/local/share/ca-certificates/
+update-ca-certificates # Might first run: dpkg-reconfigure ca-certificates
 ```
 
 ## Troubleshooting

@@ -25,6 +25,7 @@ lvm> lvs             # Logical disks accessible at /dev/${VG_pool}/${LV_disk}
 
 # First install zfs
 yum install -y http://download.zfsonlinux.org/epel/zfs-release.el7_7.noarch.rpm
+yum install -y https://zfsonlinux.org/epel/zfs-release.el8_3.noarch.rpm
 gpg --quiet --with-fingerprint /etc/pki/rpm-gpg/RPM-GPG-KEY-zfsonlinux
 vi /etc/yum.repos.d/zfs.repo
 > disable [zfs] and enable [zfs-kmod]

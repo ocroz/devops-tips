@@ -24,6 +24,7 @@ WantedBy=default.target
 ```
 
 ```bash
+sudo systemctl daemon-reload
 sudo systemctl start|stop|status|restart
 sudo systemctl enable|disable
 sudo journalctl -xe
