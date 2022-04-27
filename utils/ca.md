@@ -53,6 +53,8 @@ DNS.3 = ${application}.${ip}.xip.io
 # signed certificate with DNS names (valid for 5 years)
 openssl x509 -req -in $myserver.csr -CA ca.cert.pem -CAkey ca.key.pem -CAcreateserial -days 1825 -sha256 -extfile $myserver.ext -out $myserver.crt
 openssl x509 -noout -text -in $myserver.crt # verify the certificate
+
+openssl x509 -req -in $myserver.csr -signkey ca.key.pem -days 1825 -sha256 -extfile $myserver.ext -out $myserver.crt
 ```
 
 ## Install the server certificate on the server

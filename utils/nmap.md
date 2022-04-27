@@ -9,3 +9,11 @@ netstat -pluten         # -peanut
 lsof -i :PP
 socklist
 ```
+
+On Windows: https://superuser.com/questions/352017/pid4-using-port-80
+```powershell
+# RunAs Admin
+netstat -aon
+netstat -aon | findstr ":80"
+tasklist /svc /FI "PID eq 4"
+```

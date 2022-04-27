@@ -11,6 +11,13 @@ rpm -ivh ${rpm}           # Install a rpm
 rpm -e ${package-name}    # Uninstall this package
 ```
 
+# Query on Ubuntu
+
+```bash
+readlink -f $(which nc)
+dpkg -S /usr/bin/nc.openbsd # Query package from which this binary has been installed
+```
+
 # Build rpm from srpm (source rpm)
 
 See:

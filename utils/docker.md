@@ -10,10 +10,10 @@ sudo yum update -y
 # Either
 sudo yum install docker -y
 
-# Or
-sudo yum install yum-utils device-mapper-persistent-data lvm2 -y
+# Or https://docs.docker.com/engine/install/centos/
+sudo yum install yum-utils -y
 sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-sudo yum install docker-ce -y
+sudo yum install docker-ce docker-ce-cli containerd.io -y
 
 # Version 18+
 docker --version
