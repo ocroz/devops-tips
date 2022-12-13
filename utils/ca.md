@@ -66,7 +66,15 @@ Deploy the following files on the server:
 
 ## Install the CA certificate on the client
 
-Deploy the following file on the server:
+```bash
+# Get the SSL certificate chain for any HTTPS or LDAPS server
+openssl s_client -showcerts -connect hq.k.grp:636 </dev/null
+openssl s_client -showcerts -connect hq.k.grp:636 </dev/null | sed -ne '/-BEGIN/,/-END/p' >sslchain.crt
+cat sslchain.crt | sed -e '/-END/q' >IssuingCA.crt
+tac sslchain.crt | sed -e '/-BEGIN/q' | tac >RootCA.crt # use tac twice
+```
+
+Deploy the following file on the client machine:
 - ca.cert.pem
 
 ```bash

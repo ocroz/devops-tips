@@ -37,3 +37,12 @@ sudo systemctl list-units --type=service --state=running
 sudo systemctl list-unit-files --state=enabled
 sudo systemd-cgtop
 ```
+
+```bash
+sudo mkdir -p /var/log/journal # Must exist if Storage=auto (see below)
+sudo vi /etc/systemd/journald.conf # Storage=persistent, SystemMaxUse?
+sudo systemctl restart systemd-journald
+sudo journalctl --list-boots
+sudo journalctl -b -1
+sudo ls -lh /var/log/messages*
+```
