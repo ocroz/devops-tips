@@ -1,5 +1,7 @@
 # Query LDAP
 
+## Linux
+
 ```bash
 sudo apt install ldap-utils
 echo "TLS_REQCERT never" ~/.ldaprc
@@ -10,6 +12,10 @@ dn="CN=Olivier Crozier,OU=Cheseaux,OU=Users,OU=Enterprise,DC=hq,DC=k,DC=grp"
 ldapwhoami -H ldaps://hq.k.grp -D "$dn" -w "$pw" -x -v
 ldapsearch -H ldaps://hq.k.grp -D "$dn" -w "$pw" -x -v -b "DC=hq,DC=k,DC=grp" sAMAccountName=crozier dn
 ```
+
+## Windows
+
+If `net user|group /domain ...` is not working, use this PowerShell module:
 
 ```powershell
 Import-Module ActiveDirectory
